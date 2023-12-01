@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Weather API!</title>
+
+  <link rel="stylesheet" href="/static/stylesheet.css" th:href="@{/static/stylesheet.css}" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous" />
+</head>
+
+<body>
+
+<header>
+  <p>
+    Created by Uminsky Anton | Using Open Weather Map API from RapidAPI
+  </p>
+</header>
+
+<div id="weather_search" class="card-body" align="center">
+
+  <h3 th:text="'Weather API: Get the current weather for ' + ${@environment.getProperty('weather.city')} + '.'"></h3><br/>
+
+  <div class="col-5">
+
+    <form th:action="@{/current/weather}" method="get">
+      <button type="submit" name="current" class="btn btn-primary btn-sm">Find out the current weather!</button>
+    </form>
+
+    <div style="margin-bottom: 22px;"></div>
+
+    <form th:action="@{/average_temperature/weather}" method="get">
+      <label for="startDate">Start Date:</label>
+      <input type="date" id="startDate" name="startDate" required/>
+
+      <label for="endDate">End Date:</label>
+      <input type="date" id="endDate" name="endDate" required/><br/>
+
+      <div style="margin-bottom: 10px;"></div>
+
+      <button type="submit" name="average_temperature" class="btn btn-primary btn-sm">Weather between two dates</button>
+    </form>
+
+  </div>
+
+</div>
+
+<div th:if="${error}" style="color: red; text-align: center;">
+  <p th:text="${error}"></p>
+</div>
+
+</body>
+</html>

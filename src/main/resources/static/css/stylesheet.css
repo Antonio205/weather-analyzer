@@ -1,0 +1,41 @@
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+#weather_search .card-body {
+    margin-top: 20px;
+}
+
+#weather_search .col-5 {
+    margin-bottom: 20px;
+}
+
+.btn, .btn-sm {
+    margin-right: 10px;
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
+
+.card-body {
+    text-align: center;
+    margin-top: 20px;
+}
+
+h4 {
+    color: #007bff;
+}
+
+p {
+    font-size: 18px;
+}
+
+p span {
+    font-weight: bold;
+}

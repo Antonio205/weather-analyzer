@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="card-body text-center">
+
+  <h4>Current temperature for <span th:text="${weather.city}"></span></h4>
+  <table class="table table-sm table-striped">
+
+    <tbody>
+
+    <tr style="background-color: #000000; color: #ffffff;">
+      <td>Location</td>
+      <td>Pressure (mb)</td>
+      <td>Humidity</td>
+      <td>Wind speed (miles ph)</td>
+      <td>Temperature (C)</td>
+      <td>Information received</td>
+      <td>Weather conditions</td>
+    </tr>
+
+    <tr>
+      <td th:text="${weather.country}"></td>
+      <td th:text="${weather.pressure}"></td>
+      <td th:text="${weather.humidity}"></td>
+      <td th:text="${weather.windSpeed}"></td>
+      <td th:text="${weather.temperature}"></td>
+      <td th:text="${weather.timestamp}"></td>
+      <td th:text="${weather.weatherConditions}"></td>
+    </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+</body>
+</html>
