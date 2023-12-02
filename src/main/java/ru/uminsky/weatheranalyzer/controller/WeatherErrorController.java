@@ -19,7 +19,7 @@ public class WeatherErrorController implements ErrorController {
             int statusCode = Integer.parseInt(status.toString());
 
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
-                return "errors/not-found-error";
+                return "errors/not_found_error";
             }
             else {
                 return "errors/error";

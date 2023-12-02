@@ -20,7 +20,7 @@ class  WeatherErrorControllerTest {
 
         String viewName = errorController.handleException(request);
 
-        assertEquals("errors/not-found-error", viewName);
+        assertEquals("errors/not_found_error", viewName);
     }
 
     @Test

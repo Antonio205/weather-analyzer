@@ -34,7 +34,7 @@ To get a local copy of Weather Finder up and running follow these simple example
 
 5. Go to your application.properties file and enter the API key for config property rapid.api.key=YOUR_RAPID_API_KEY
 
-6. Deploy the database using the script from the init-database.sql file
+6. Deploy MySQL database using the script from the init-database.sql file
 
 7. Enter spring.datasource.url, spring.datasource.username, spring.datasource.password of your database in application.properties file
 
