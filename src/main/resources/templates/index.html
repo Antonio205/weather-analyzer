@@ -3,9 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Weather API!</title>
+  <title>Weather API</title>
 
-  <link rel="stylesheet" href="/static/stylesheet.css" th:href="@{/static/stylesheet.css}" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous" />
@@ -25,13 +24,13 @@
 
   <div class="col-5">
 
-    <form th:action="@{/current/weather}" method="get">
+    <form th:action="@{/weather/current}" method="get">
       <button type="submit" name="current" class="btn btn-primary btn-sm">Find out the current weather!</button>
     </form>
 
     <div style="margin-bottom: 22px;"></div>
 
-    <form th:action="@{/average_temperature/weather}" method="get">
+    <form th:action="@{/weather/average_temperature}" method="get">
       <label for="startDate">Start Date:</label>
       <input type="date" id="startDate" name="startDate" required/>
 

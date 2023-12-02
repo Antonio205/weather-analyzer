@@ -46,9 +46,9 @@ public class WeatherServiceImpl implements WeatherService {
 
 	// method for first endpoint
 	@Override
-	public Weather findTopWeather() {
+	public Weather findTopWeather(String city) {
 		logger.info("Fetching top weather record");
-		return weatherRepository.findTopByOrderByIdDesc();
+		return weatherRepository.findTopByCityOrderByIdDesc(city);
 	}
 
 	// method for second endpoint

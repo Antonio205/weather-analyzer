@@ -23,50 +23,46 @@ public class WeatherServiceImplTest {
     @Mock
     private WeatherParser parser;
 
+    private String city;
+
     @InjectMocks
     private WeatherServiceImpl weatherService;
 
     @Test
     void testSaveWeather() {
-        // Arrange
+
         Weather weatherToSave = new Weather();
         when(weatherRepository.save(weatherToSave)).thenReturn(weatherToSave);
 
-        // Act
         Weather result = weatherService.saveWeather(weatherToSave);
 
-        // Assert
         assertEquals(weatherToSave, result);
         verify(weatherRepository, times(1)).save(weatherToSave);
     }
 
     @Test
     void testFindTopWeather() {
-        // Arrange
+
         Weather expectedWeather = new Weather();
-        when(weatherRepository.findTopByOrderByIdDesc()).thenReturn(expectedWeather);
+        when(weatherRepository.findTopByCityOrderByIdDesc(city)).thenReturn(expectedWeather);
 
-        // Act
-        Weather result = weatherService.findTopWeather();
+        Weather result = weatherService.findTopWeather(city);
 
-        // Assert
         assertEquals(expectedWeather, result);
-        verify(weatherRepository, times(1)).findTopByOrderByIdDesc();
+        verify(weatherRepository, times(1)).findTopByCityOrderByIdDesc(city);
     }
 
     @Test
     void testFindAverageTemperatureBetweenDates() {
-        // Arrange
+
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = LocalDate.now().plusDays(1);
         Double expectedAverageTemperature = 25.5;
-        when(weatherRepository.findAverageTemperatureBetweenDates(startDate, endDate)).thenReturn(expectedAverageTemperature);
+        when(weatherRepository.findAverageTemperatureBetweenDates(startDate, endDate, city)).thenReturn(expectedAverageTemperature);
 
-        // Act
-        Double result = weatherService.findAverageTemperatureBetweenDates(startDate, endDate);
+        Double result = weatherService.findAverageTemperatureBetweenDates(startDate, endDate, city);
 
-        // Assert
         assertEquals(expectedAverageTemperature, result);
-        verify(weatherRepository, times(1)).findAverageTemperatureBetweenDates(startDate, endDate);
+        verify(weatherRepository, times(1)).findAverageTemperatureBetweenDates(startDate, endDate, city);
     }
 }

@@ -1,4 +1,26 @@
 
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: center;
+    padding: 50px;
+}
+
+h1 {
+    color: #d9534f;
+}
+
+p {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
 header {
     background-color: #4CAF50;
     color: white;
@@ -30,10 +52,6 @@ header {
 
 h4 {
     color: #007bff;
-}
-
-p {
-    font-size: 18px;
 }
 
 p span {

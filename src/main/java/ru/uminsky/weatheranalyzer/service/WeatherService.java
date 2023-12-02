@@ -11,7 +11,7 @@ public interface WeatherService {
 
     Weather saveWeather(Weather weather);
 
-    Weather findTopWeather();
+    Weather findTopWeather(String city);
 
     Double findAverageTemperatureBetweenDates(LocalDate startDate, LocalDate endDate, String city);
 

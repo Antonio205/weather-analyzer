@@ -31,12 +31,6 @@ public class WeatherController implements ErrorController {
 	@Value("${weather.city}")
 	private String defaultCity;
 
-	@RequestMapping("/error")
-	public String handleError() {
-
-		return "errors/error";
-	}
-
 	@RequestMapping("/")
 	public String getHomePage(Model model) {
 
@@ -46,12 +40,12 @@ public class WeatherController implements ErrorController {
 	}
 
 	// first endpoint, returns the current value from the database, if missing, reports it
-	@GetMapping("/current/weather")
+	@GetMapping("/weather/current")
 	public String getCurrentTopWeather(Model model) {
 
 		logger.info("Request received for current weather data.");
 
-		Weather weather = weatherService.findTopWeather();
+		Weather weather = weatherService.findTopWeather(defaultCity);
 
 		if (weather != null) {
 			model.addAttribute("weather", weather);
@@ -79,7 +73,7 @@ public class WeatherController implements ErrorController {
 	}
 
 	// second endpoint, displays the average temperature value for all data between two dates inclusive
-	@GetMapping("/average_temperature/weather")
+	@GetMapping("/weather/average_temperature")
 	public String getAverageTemperature(
 			@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
 			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
@@ -98,7 +92,7 @@ public class WeatherController implements ErrorController {
 		if (averageTemperatureBetweenDates != null) {
 			model.addAttribute("startDate", startDate);
 			model.addAttribute("endDate", endDate);
-			model.addAttribute("averageTemperature", averageTemperatureBetweenDates);
+			model.addAttribute("averageTemperature", String.format("%.2f", averageTemperatureBetweenDates));
 			logger.info("Average temperature between dates calculated and sent to the view.");
 			return "weather/average_temperature";
 		} else {

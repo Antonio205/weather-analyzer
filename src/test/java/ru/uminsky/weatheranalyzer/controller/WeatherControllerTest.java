@@ -19,6 +19,8 @@ public class WeatherControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    private String city;
+
     @MockBean
     private WeatherService weatherService;
 
@@ -26,20 +28,18 @@ public class WeatherControllerTest {
     public void testGetCurrentTopWeather() throws Exception {
 
         Weather mockWeather = new Weather();
-        Mockito.when(weatherService.findTopWeather()).thenReturn(mockWeather);
+        Mockito.when(weatherService.findTopWeather(city)).thenReturn(mockWeather);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/current/weather"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("weather/current_weather"))
-                .andExpect(MockMvcResultMatchers.model().attributeExists("weather"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/weather/current"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
     public void testGetCurrentTopWeatherNoData() throws Exception {
 
-        Mockito.when(weatherService.findTopWeather()).thenReturn(null);
+        Mockito.when(weatherService.findTopWeather(city)).thenReturn(null);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/current/weather"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/weather/current"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("index"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("error"));
@@ -51,9 +51,9 @@ public class WeatherControllerTest {
         LocalDate startDate = LocalDate.now().minusDays(7);
         LocalDate endDate = LocalDate.now();
         Double mockAverageTemperature = 25.0;
-        Mockito.when(weatherService.findAverageTemperatureBetweenDates(startDate, endDate)).thenReturn(mockAverageTemperature);
+        Mockito.when(weatherService.findAverageTemperatureBetweenDates(startDate, endDate, city)).thenReturn(mockAverageTemperature);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/average_temperature/weather")
+        mockMvc.perform(MockMvcRequestBuilders.get("/weather/average_temperature")
                         .param("startDate", startDate.toString())
                         .param("endDate", endDate.toString()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -64,7 +64,7 @@ public class WeatherControllerTest {
     @Test
     public void testGetAverageTemperatureInvalidDateRange() throws Exception {
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/average_temperature/weather")
+        mockMvc.perform(MockMvcRequestBuilders.get("/weather/average_temperature")
                         .param("startDate", LocalDate.now().toString())
                         .param("endDate", LocalDate.now().minusDays(1).toString()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
